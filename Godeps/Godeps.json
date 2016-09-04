@@ -1,0 +1,25 @@
+{
+	"ImportPath": "github.com/xjchan/titans",
+	"GoVersion": "go1.6",
+	"Deps": [
+		{
+			"ImportPath": "github.com/Unknwon/com",
+			"Comment": "v1",
+			"Rev": "28b053d5a2923b87ce8c5a08f3af779894a72758"
+		},
+		{
+			"ImportPath": "github.com/go-macaron/inject",
+			"Rev": "d8a0b8677191f4380287cfebd08e462217bac7ad"
+		},
+		{
+			"ImportPath": "gopkg.in/ini.v1",
+			"Comment": "v1.21.1",
+			"Rev": "6e4869b434bd001f6983749881c7ead3545887d8"
+		},
+		{
+			"ImportPath": "gopkg.in/macaron.v1",
+			"Comment": "v1.1.8",
+			"Rev": "dc39d5dff2361e85072652151bdc9272b8280a6a"
+		}
+	]
+}
