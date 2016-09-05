@@ -4,7 +4,7 @@ import (
 	"fmt"
 	// "gopkg.in/macaron.v1"
 	// "net/http"
-	titanApp "github.com/xjchan/titans/server/app"
+	titanApp "github.com/xjchan/titans/app"
 )
 
 func main() {

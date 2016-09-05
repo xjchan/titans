@@ -2,7 +2,7 @@ package handlers
 
 import (
 	"fmt"
-	"github.com/xjchan/titans/server/app/business/post"
+	"github.com/xjchan/titans/app/business/post"
 	"gopkg.in/macaron.v1"
 	// "net/http"
 )

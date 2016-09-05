@@ -1,7 +1,7 @@
 package mongoDB
 
 import (
-	// "github.com/xjchan/titans/server/app"
+	// "github.com/xjchan/titans/app"
 	"fmt"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/yaml.v2"

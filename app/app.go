@@ -2,7 +2,7 @@ package app
 
 import (
 	"fmt"
-	"github.com/xjchan/titans/server/app/handlers"
+	"github.com/xjchan/titans/app/handlers"
 	"gopkg.in/macaron.v1"
 	"os"
 	// "path/filepath"

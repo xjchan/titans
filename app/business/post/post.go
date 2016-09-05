@@ -3,17 +3,16 @@ package post
 import (
 	// "errors"
 	"fmt"
-	"github.com/xjchan/titans/server/app/DB/mongoDB"
+	"github.com/xjchan/titans/app/DB/mongoDB"
 	// "gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )
 
 //Post the struct of post
 type Post struct {
-	ID       int64   `bson:"ID"`  //unique id of a post
-	UID      int64   `bson:"UID"` //the uid of the post owner
-	Text     string  `bson:"Text"`
-	Replises []Reply `bson:"Replises"`
+	ID   int64  `bson:"ID"`  //unique id of a post
+	UID  int64  `bson:"UID"` //the uid of the post owner
+	Text string `bson:"Text"`
 }
 
 //Reply the Reply of a post
