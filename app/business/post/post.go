@@ -3,7 +3,7 @@ package post
 import (
 	// "errors"
 	"fmt"
-	"github.com/xjchan/titans/app/DB/mongoDB"
+	"github.com/xjchan/titans/DB/mongoDB"
 	// "gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )
@@ -27,14 +27,18 @@ type Reply struct {
 //GetPost get Post data
 func GetPost(ID int64) (Post, error) {
 	// session, _ := mgo.Dial("127.0.0.1")
-	session := mongoDB.Connnet()
+	session, err := mongoDB.Connnet()
+	if err != nil {
+		return Post{}, err
+	}
+
 	defer session.Close()
 
 	c := session.DB("titans").C("post")
 
 	post := Post{}
 
-	err := c.Find(bson.D{{"ID", ID}}).One(&post)
+	err = c.Find(bson.D{{"ID", ID}}).One(&post)
 
 	if err != nil {
 		fmt.Println(err)

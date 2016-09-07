@@ -1,7 +1,7 @@
 package app
 
 import (
-	"fmt"
+	// "fmt"
 	"github.com/xjchan/titans/app/handlers"
 	"gopkg.in/macaron.v1"
 	"os"
@@ -10,7 +10,7 @@ import (
 
 // Init 初始化服务器
 func Init() {
-	fmt.Println("dir:" + Dir())
+	// fmt.Println("dir:" + Dir())
 
 	m := macaron.Classic()
 
