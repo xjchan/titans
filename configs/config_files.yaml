@@ -1,0 +1,3 @@
+#DB configs
+
+mongoDB : ./configs/DB/mongoDB.yaml
