@@ -1,13 +1,18 @@
 package mongoDB
 
 import (
-	// "fmt"
 	"github.com/xjchan/titans/tools"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/yaml.v2"
 )
 
 var conf = mongoConfig{}
+
+//mongoConfig mongoConfig
+type mongoConfig struct {
+	URL      string `yaml:"url"`
+	Database string `yaml:"database"`
+}
 
 func init() {
 	c, err := tools.GetConfig("mongoDB", conf)
@@ -19,9 +24,8 @@ func init() {
 	}
 }
 
-//mongoConfig mongoConfig
-type mongoConfig struct {
-	URL string `yaml:"url"`
+func GetConfig() mongoConfig {
+	return conf
 }
 
 //config.Builder interface
@@ -39,9 +43,10 @@ func Connnet() (*mgo.Session, error) {
 	// fmt.Println("error:" + err.Error())
 	if err == nil {
 		return session, nil
-	} else {
-		// tools.CheckError(err)
-		return nil, err
 	}
+	return nil, err
+}
 
+func Close(s *mgo.Session) {
+	s.Close()
 }

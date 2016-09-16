@@ -8,6 +8,11 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
+var (
+	database  = mongoDB.GetConfig().Database
+	coloction = "post"
+)
+
 //Post the struct of post
 type Post struct {
 	ID   int64  `bson:"ID"`  //unique id of a post
@@ -24,33 +29,63 @@ type Reply struct {
 	Text   string
 }
 
-//GetPost get Post data
-func GetPost(ID int64) (Post, error) {
-	// session, _ := mgo.Dial("127.0.0.1")
+func (p *Post) Get(m bson.M) error {
 	session, err := mongoDB.Connnet()
 	if err != nil {
-		return Post{}, err
+		return err
 	}
 
-	defer session.Close()
+	defer mongoDB.Close(session)
 
-	c := session.DB("titans").C("post")
+	c := session.DB(database).C(coloction)
 
-	post := Post{}
-
-	err = c.Find(bson.D{{"ID", ID}}).One(&post)
+	err = c.Find(m).One(p)
 
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	fmt.Println(post)
+	fmt.Println(p)
 
-	return post, nil
+	return nil
 }
 
-//GetPieces get pieces of Reply
-func (Reply) GetPieces(ParentID int64, form int, rows int) ([]Reply, error) {
-	replies := make([]Reply, 1)
-	return replies, nil
+func (p *Post) Add() error {
+	session, err := mongoDB.Connnet()
+	if err != nil {
+		return err
+	}
+	defer mongoDB.Close(session)
+
+	c := session.DB(database).C(coloction)
+
+	err = c.Insert(p)
+	return err
+}
+
+func (p *Post) Update(selector bson.M) error {
+	session, err := mongoDB.Connnet()
+	if err != nil {
+		return err
+	}
+	defer mongoDB.Close(session)
+
+	c := session.DB(database).C(coloction)
+
+	err = c.Update(selector, p)
+	return err
+}
+
+func (p *Post) Delete(selector bson.M) error {
+	session, err := mongoDB.Connnet()
+	if err != nil {
+		return err
+	}
+	defer mongoDB.Close(session)
+
+	c := session.DB(database).C(coloction)
+
+	err = c.Remove(selector)
+
+	return err
 }

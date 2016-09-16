@@ -1,11 +1,12 @@
 package app
 
 import (
-	// "fmt"
-	"github.com/xjchan/titans/app/handlers"
+	"github.com/go-macaron/oauth2"
+	"github.com/go-macaron/session"
+	"github.com/xjchan/titans/app/routers"
+	goauth2 "golang.org/x/oauth2"
 	"gopkg.in/macaron.v1"
 	"os"
-	// "path/filepath"
 )
 
 // Init 初始化服务器
@@ -13,12 +14,23 @@ func Init() {
 	// fmt.Println("dir:" + Dir())
 
 	m := macaron.Classic()
+	m.Use(session.Sessioner())
 
-	m.Get("/", func() string {
-		return "Hello World！"
+	m.Use(oauth2.Google(
+		&goauth2.Config{
+			ClientID:     "client_id",
+			ClientSecret: "client_secret",
+			Scopes:       []string{"https://www.googleapis.com/auth/drive"},
+			RedirectURL:  "redirect_url",
+		},
+	))
+
+	m.Use(func() string {
+		return "test_midware"
 	})
 
-	m.Get("/post", handlers.GetPost)
+	// m.MapTo("inject_test", 1)
+	routers.IinitRouters(m)
 	m.Run()
 }
 
